@@ -1,9 +1,16 @@
 import React, { Component } from "react";
+import PersonService from "../services/PersonService";
 
 class ListPersonComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { persons: [] };
+  }
+
+  componentDidMount() {
+    PersonService.getPersons().then((res) => {
+      this.setState({ persons: res.data });
+    });
   }
 
   render() {
