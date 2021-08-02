@@ -5,6 +5,8 @@ class ListPersonComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { persons: [] };
+    this.addPerson = this.addPerson.bind(this);
+    this.updatePerson = this.updatePerson.bind(this);
   }
 
   componentDidMount() {
@@ -13,10 +15,25 @@ class ListPersonComponent extends Component {
     });
   }
 
+  addPerson() {
+    this.props.history.push("/add-person");
+  }
+
+  updatePerson(id) {
+    this.props.history.push(`/update-person/${id}`);
+  }
+
   render() {
     return (
       <div>
         <h2 className="text-center">Persons List</h2>
+        <button
+          className="btn btn-primary"
+          onClick={this.addPerson}
+          style={{ marginBottom: "5px" }}
+        >
+          Add Person
+        </button>
         <div className="row">
           <table className="table table-striped table-bordered">
             <thead>
@@ -33,6 +50,14 @@ class ListPersonComponent extends Component {
                   <td> {person.firstName}</td>
                   <td> {person.lastName}</td>
                   <td> {person.email}</td>
+                  <td>
+                    <button
+                      className="btn btn-info"
+                      onClick={() => this.updatePerson(person.id)}
+                    >
+                      Update
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
