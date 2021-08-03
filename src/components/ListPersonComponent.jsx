@@ -8,6 +8,7 @@ class ListPersonComponent extends Component {
     this.addPerson = this.addPerson.bind(this);
     this.updatePerson = this.updatePerson.bind(this);
     this.deletePerson = this.deletePerson.bind(this);
+    this.viewPersonDetails = this.viewPersonDetails.bind(this);
   }
 
   componentDidMount() {
@@ -24,6 +25,9 @@ class ListPersonComponent extends Component {
     this.props.history.push(`/add-person/${id}`);
   }
 
+  viewPersonDetails(id) {
+    this.props.history.push(`/view-person/${id}`);
+  }
   deletePerson(id) {
     PersonService.deletePersonById(id).then((res) => {
       this.setState({
@@ -65,6 +69,13 @@ class ListPersonComponent extends Component {
                       onClick={() => this.updatePerson(person.id)}
                     >
                       Update
+                    </button>
+                    <button
+                      className="btn btn-info"
+                      style={{ marginLeft: "10px" }}
+                      onClick={() => this.viewPersonDetails(person.id)}
+                    >
+                      Details
                     </button>
                     <button
                       className="btn btn-danger"

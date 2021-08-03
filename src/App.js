@@ -5,6 +5,7 @@ import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
 import CreatePersonComponent from "./components/CreatePersonComponent";
 import UpdatePersonComponent from "./components/UpdatePersonComponent";
+import ViewPersonComponent from "./components/ViewPersonComponent";
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
             <Route
               path="/add-person/:id"
               component={CreatePersonComponent}
+            ></Route>
+            <Route
+              path="/view-person/:id"
+              component={ViewPersonComponent}
             ></Route>
           </Switch>
         </div>
