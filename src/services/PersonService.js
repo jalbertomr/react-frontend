@@ -21,6 +21,10 @@ class PersonService {
   updatePerson(person, personId) {
     return axios.put(PERSON_API_BASE_URL + "/" + personId, person);
   }
+
+  deletePersonById(personId) {
+    return axios.delete(PERSON_API_BASE_URL + "/" + personId);
+  }
 }
 
 export default new PersonService();

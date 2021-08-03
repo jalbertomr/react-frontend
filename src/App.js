@@ -16,12 +16,10 @@ function App() {
           <Switch>
             <Route path="/" exact component={ListPersonComponent}></Route>
             <Route path="/persons" component={ListPersonComponent}></Route>
-            <Route path="/add-person" component={CreatePersonComponent}></Route>
             <Route
-              path="/update-person/:id"
-              component={UpdatePersonComponent}
+              path="/add-person/:id"
+              component={CreatePersonComponent}
             ></Route>
-            <ListPersonComponent />
           </Switch>
         </div>
         <FooterComponent />

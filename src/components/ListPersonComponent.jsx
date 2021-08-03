@@ -7,6 +7,7 @@ class ListPersonComponent extends Component {
     this.state = { persons: [] };
     this.addPerson = this.addPerson.bind(this);
     this.updatePerson = this.updatePerson.bind(this);
+    this.deletePerson = this.deletePerson.bind(this);
   }
 
   componentDidMount() {
@@ -16,11 +17,19 @@ class ListPersonComponent extends Component {
   }
 
   addPerson() {
-    this.props.history.push("/add-person");
+    this.props.history.push("/add-person/_add");
   }
 
   updatePerson(id) {
-    this.props.history.push(`/update-person/${id}`);
+    this.props.history.push(`/add-person/${id}`);
+  }
+
+  deletePerson(id) {
+    PersonService.deletePersonById(id).then((res) => {
+      this.setState({
+        persons: this.state.persons.filter((person) => person.id !== id),
+      });
+    });
   }
 
   render() {
@@ -56,6 +65,13 @@ class ListPersonComponent extends Component {
                       onClick={() => this.updatePerson(person.id)}
                     >
                       Update
+                    </button>
+                    <button
+                      className="btn btn-danger"
+                      style={{ marginLeft: "10px" }}
+                      onClick={() => this.deletePerson(person.id)}
+                    >
+                      Delete
                     </button>
                   </td>
                 </tr>

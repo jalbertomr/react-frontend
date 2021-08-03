@@ -6,6 +6,7 @@ class CreatePersonComponent extends Component {
     super(props);
 
     this.state = {
+      id: this.props.match.params.id,
       firstName: "",
       lastName: "",
       email: "",
@@ -13,11 +14,26 @@ class CreatePersonComponent extends Component {
     this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
     this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
     this.changeEmailHandler = this.changeEmailHandler.bind(this);
-    this.savePerson = this.savePerson.bind(this);
+    this.saveOrUpdatePerson = this.saveOrUpdatePerson.bind(this);
     this.cancel = this.cancel.bind(this);
   }
 
-  savePerson = (e) => {
+  componentDidMount() {
+    if (this.state.id === "_add") {
+      return;
+    } else {
+      PersonService.getPersonById(this.state.id).then((res) => {
+        let person = res.data;
+        this.setState({
+          firstName: person.firstName,
+          lastName: person.lastName,
+          email: person.email,
+        });
+      });
+    }
+  }
+
+  saveOrUpdatePerson = (e) => {
     e.preventDefault();
     let person = {
       firstName: this.state.firstName,
@@ -26,7 +42,15 @@ class CreatePersonComponent extends Component {
     };
     console.log("person => " + JSON.stringify(person));
 
-    PersonService.createPerson(person);
+    if (this.state.id === "_add") {
+      PersonService.createPerson(person).then((res) => {
+        this.props.history.push("/persons");
+      });
+    } else {
+      PersonService.updatePerson(person, this.state.id).then((res) => {
+        this.props.history.push("/persons");
+      });
+    }
   };
 
   cancel() {
@@ -45,13 +69,21 @@ class CreatePersonComponent extends Component {
     this.setState({ email: event.target.value });
   }
 
+  getOperationTitle() {
+    if (this.state.id === "_add") {
+      return <h3 className="text-center">Add Person</h3>;
+    } else {
+      return <h3 className="text-center">Update Person</h3>;
+    }
+  }
+
   render() {
     return (
       <div>
         <div className="container">
           <div className="row">
             <div className="card col-md-6 offset-md-3 offset-md-3">
-              <h3 className="text-center">Add Person</h3>
+              {this.getOperationTitle()}
               <div className="card-body">
                 <form>
                   <div className="form-group">
@@ -80,7 +112,10 @@ class CreatePersonComponent extends Component {
                       onChange={this.changeEmailHandler}
                     />
                   </div>
-                  <button className="btn btn-success" onClick={this.savePerson}>
+                  <button
+                    className="btn btn-success"
+                    onClick={this.saveOrUpdatePerson}
+                  >
                     Save
                   </button>
                   <button
