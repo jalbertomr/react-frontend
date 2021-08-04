@@ -24,8 +24,12 @@ class ViewPersonComponent extends Component {
   render() {
     return (
       <div>
-        <div className="card col-md-6 offset-md-3">
+        <div
+          className="card col-md-6 offset-md-3"
+          style={{ marginBottom: "5px" }}
+        >
           <h3 className="text-center"> View Person Details</h3>
+
           <div className="card-body">
             <div className="row">
               <label className="col"> First Name: </label>
@@ -39,9 +43,10 @@ class ViewPersonComponent extends Component {
               <label className="col"> email: </label>
               <div className="col"> {this.state.person.email}</div>
             </div>
+          </div>
+          <div className="row">
             <button
               className="btn btn-info col"
-              style={{ marginLeft: "10px" }}
               onClick={() => this.goPersons()}
             >
               Back
