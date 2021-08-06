@@ -66,6 +66,7 @@ class ListPersonComponent extends Component {
                   <td>
                     <button
                       className="btn btn-info"
+                      style={{ marginLeft: "10px" }}
                       onClick={() => this.updatePerson(person.id)}
                     >
                       Update
