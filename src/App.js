@@ -4,7 +4,6 @@ import ListPersonComponent from "./components/ListPersonComponent";
 import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
 import CreatePersonComponent from "./components/CreatePersonComponent";
-import UpdatePersonComponent from "./components/UpdatePersonComponent";
 import ViewPersonComponent from "./components/ViewPersonComponent";
 
 function App() {
