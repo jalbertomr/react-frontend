@@ -1,3 +1,9 @@
+#Reference on blogger 
+
+https://www.blogger.com/u/2/blog/post/edit/4804601162289330966/1196222629924102366?hl=es-419
+
+also links of the backend in there.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
